@@ -29,7 +29,7 @@ a { color: inherit; }
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.93) 34%, rgba(255,255,255,.15) 75%),
-    url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=85") center 52% / cover;
+    url("images/default.svg") center 52% / cover;
   border-bottom: 4px solid #e5f0e9;
 }
 .brand { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; }
@@ -46,6 +46,7 @@ a { color: inherit; }
 .nav-wrap { background: var(--navy-dark); position: sticky; top: 0; z-index: 20; box-shadow: 0 4px 14px #092d5120; }
 nav { max-width: 1200px; margin: auto; display: flex; }
 nav a { display: block; text-decoration: none; color: #fff; padding: 15px 20px; font-size: .91rem; font-weight: 700; border-bottom: 4px solid transparent; }
+nav a:last-child { margin-left: auto; }
 nav a:hover, nav a:focus, nav a.active { background: #0e507d; border-bottom-color: #18bd82; outline: none; }
 main { max-width: 1200px; margin: 26px auto 55px; padding: 0 22px; }
 .top-grid { display: grid; grid-template-columns: minmax(0, 1.72fr) minmax(290px, .95fr); gap: 24px; align-items: start; }
@@ -122,6 +123,7 @@ footer { background: #eaf5ef; border-top: 1px solid #d5e8dc; color: #315d4b; tex
   .brand-mark { width: 48px; height: 56px; font-size: 22px; }
   .brand strong { font-size: 1.8rem; }
   .brand small { font-size: .8rem; }
+  nav { flex-wrap: wrap; }
   nav a { padding: 12px 15px; font-size: .84rem; }
   .feature-copy { padding: 0 15px 18px; }
   .feature-copy h2 { font-size: 1.75rem; }

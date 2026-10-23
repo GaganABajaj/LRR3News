@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Life Republic community</title>
+  <desc id="desc">An abstract green community landscape with homes and trees.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#d9f0f2"/>
+      <stop offset="1" stop-color="#f7fbf8"/>
+    </linearGradient>
+    <linearGradient id="hill" x2="0" y2="1">
+      <stop stop-color="#9fcf9f"/>
+      <stop offset="1" stop-color="#3c9168"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1200v600H0z"/>
+  <circle cx="960" cy="125" r="58" fill="#fff2bf"/>
+  <path fill="#b3d8c2" d="M0 350 235 195l260 184 218-171 270 167 217-142v367H0z"/>
+  <path fill="url(#hill)" d="M0 405c195-90 347-74 535 9s394 63 665-38v224H0z"/>
+  <g fill="#fff" stroke="#d7e9e2" stroke-width="8">
+    <path d="m340 356 98-83 98 83v108H340z"/>
+    <path d="m530 386 76-65 76 65v82H530z"/>
+    <path d="m735 345 105-90 105 90v126H735z"/>
+  </g>
+  <g fill="#16835e">
+    <path d="M178 405h22v95h-22z"/><circle cx="189" cy="382" r="48"/>
+    <path d="M1010 391h22v105h-22z"/><circle cx="1021" cy="368" r="53"/>
+    <path d="M1090 420h18v75h-18z"/><circle cx="1099" cy="401" r="38"/>
+  </g>
+  <g fill="#9bd4c2">
+    <path d="M0 512c230-33 415 27 614 2s379-62 586-7v93H0z"/>
+  </g>
+</svg>
