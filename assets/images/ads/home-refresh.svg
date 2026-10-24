@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="title">
+  <title id="title">Home and living ideas</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#ede9fe"/><stop offset="1" stop-color="#c4b5fd"/></linearGradient></defs>
+  <path fill="url(#bg)" d="M0 0h600v360H0z"/>
+  <circle cx="510" cy="65" r="103" fill="#fff" opacity=".4"/>
+  <circle cx="72" cy="322" r="93" fill="#fff" opacity=".42"/>
+  <path d="m176 179 124-103 124 103v116H329v-77h-58v77h-95z" fill="#fff" opacity=".9" stroke="#6d56a8" stroke-width="10" stroke-linejoin="round"/>
+</svg>

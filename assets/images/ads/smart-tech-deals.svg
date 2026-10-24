@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="title">
+  <title id="title">Smart technology devices</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#dbeafe"/><stop offset="1" stop-color="#93c5fd"/></linearGradient></defs>
+  <path fill="url(#bg)" d="M0 0h600v360H0z"/>
+  <circle cx="505" cy="70" r="105" fill="#fff" opacity=".36"/>
+  <circle cx="72" cy="330" r="92" fill="#fff" opacity=".38"/>
+  <rect x="207" y="83" width="186" height="142" rx="17" fill="#fff" opacity=".78"/>
+  <rect x="222" y="99" width="156" height="101" rx="8" fill="#2563eb" opacity=".83"/>
+  <path d="M180 241h240l-22 18H202z" fill="#fff" opacity=".92"/>
+  <path d="M271 278h58M300 260v18" stroke="#244777" stroke-width="10" stroke-linecap="round"/>
+</svg>

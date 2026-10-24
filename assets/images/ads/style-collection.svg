@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="title">
+  <title id="title">Fashion clothing collection</title>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#fce7f3"/><stop offset="1" stop-color="#f9a8d4"/></linearGradient></defs>
+  <path fill="url(#bg)" d="M0 0h600v360H0z"/>
+  <circle cx="512" cy="58" r="102" fill="#fff" opacity=".4"/>
+  <circle cx="65" cy="320" r="95" fill="#fff" opacity=".4"/>
+  <path d="m259 88 41 20 41-20 61 54-39 41-25-21v106H262V162l-25 21-39-41z" fill="#fff" opacity=".9" stroke="#a33d79" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M274 98c0 28 10 42 26 42s26-14 26-42" fill="none" stroke="#a33d79" stroke-width="8"/>
+</svg>
