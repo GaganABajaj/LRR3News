@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Local services and notices for the Life Republic R3 community.">
+  <meta name="description" content="Search and browse local advertisements and offers in the Life Republic R3 community.">
   <title>Advertisements | Life Republic R3 News</title>
   <link rel="stylesheet" href="assets/site.css">
 
@@ -15,6 +15,7 @@
     gtag('config', 'G-M17FV0XR5F');
   </script>
 </head>
+
 <body>
 
 
@@ -28,17 +29,133 @@
     </header>
     <div class="nav-wrap"><nav aria-label="Main navigation"><a class="" href="index.html">Home</a><a class="" href="opinions.html">Opinions</a><a class="active" href="advertisements.html">Advertisements</a><a class="" href="archive.html">Archive</a></nav></div>
 
-<main>
-  <section class="page-intro">
-    <span class="eyebrow">Life Republic R3 News</span>
-    <h1>Advertisements</h1>
-    <p>Local services and notices for the Life Republic R3 community.</p>
+<main class="ads-page">
+  <section class="ads-hero">
+    <div class="ads-hero-content">
+      <span class="ads-eyebrow">Life Republic R3 community</span>
+      <h1>Discover something great.</h1>
+      <p>Explore local products, services, and offers from around the community.</p>
+      <form class="ads-search" id="ads-search-form" role="search">
+        <span class="ads-search-icon" aria-hidden="true">⌕</span>
+        <input id="ads-search-input" type="search"
+          placeholder="Search advertisements..." aria-label="Search advertisements">
+        <button class="ads-search-button" type="submit">Search</button>
+      </form>
+    </div>
   </section>
-  <section class="empty-state">
-    <h2>Coming soon</h2>
-    <p>Community advertisements will be listed here.</p>
+  <section class="ads-section" aria-labelledby="ads-category-heading">
+    <div class="ads-section-heading">
+      <div><h2 id="ads-category-heading">Browse categories</h2>
+      <p>Choose a category to find relevant advertisements.</p></div>
+      <button class="ads-view-all" id="ads-view-all" type="button">View all</button>
+    </div>
+    <div class="ads-tabs" role="tablist" aria-label="Advertisement categories">
+      <button class="ads-tab active" type="button" role="tab" aria-selected="true"
+        data-category="All">All ads</button>
+      <button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Food &amp; Catering">Food &amp; Catering</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Fashion &amp; Clothing">Fashion &amp; Clothing</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Beauty &amp; Wellness">Beauty &amp; Wellness</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Education &amp; Coaching">Education &amp; Coaching</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Home Services">Home Services</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Professional Services">Professional Services</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Computer &amp; IT">Computer &amp; IT</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Arts, Crafts &amp; Handmade">Arts, Crafts &amp; Handmade</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Gifts, Toys &amp; Kids">Gifts, Toys &amp; Kids</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Home &amp; Garden">Home &amp; Garden</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Health &amp; Care">Health &amp; Care</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Events, Travel &amp; Lifestyle">Events, Travel &amp; Lifestyle</button><button class="ads-tab" type="button" role="tab" aria-selected="false" data-category="Property Sales &amp; Rentals">Property Sales &amp; Rentals</button>
+    </div>
+  </section>
+  <section class="ads-section" id="advertisements" aria-labelledby="ads-title">
+    <div class="ads-toolbar">
+      <div><h2 id="ads-title">Popular advertisements</h2>
+      <div class="ads-result-count" id="ads-result-count" aria-live="polite">
+        Showing 10 advertisements
+      </div></div>
+      <label class="ads-sort-label" for="ads-sort">Sort advertisements
+        <select id="ads-sort" class="ads-sort">
+          <option value="az">Name: A–Z</option>
+          <option value="za">Name: Z–A</option>
+          <option value="new-old" selected>Date: New–Old</option>
+          <option value="old-new">Date: Old–New</option>
+        </select>
+      </label>
+    </div>
+    <div class="ads-grid" id="ads-grid">
+      <article class="ads-card ads-art-blue" data-name="Sample 2BHK Apartment for Sale" data-category="Property Sales &amp; Rentals" data-details="Illustrative listing only. Sample 2-bedroom apartment in Life Republic; sample asking price INR 78 lakh. Verify availability, terms, and details with the advertiser." data-advertiser="R3 Realty (Sample)" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/property-sale.svg" alt="Sample 2BHK Apartment for Sale" loading="lazy"><span class="ads-card-category">FOR SALE</span></div><div class="ads-card-body"><div class="ads-category-label">Property Sales &amp; Rentals</div><h3>Sample 2BHK Apartment for Sale</h3><p>Illustrative listing only. Sample 2-bedroom apartment in Life Republic; sample asking price INR 78 lakh. Verify availability, terms, and details with the advertiser.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">RR</span>R3 Realty (Sample)</span></div></div></article><article class="ads-card ads-art-pink" data-name="Sample 2BHK Apartment for Rent" data-category="Property Sales &amp; Rentals" data-details="Illustrative listing only. Sample 2-bedroom apartment in Life Republic; sample asking rent INR 28,000 per month. Verify availability, terms, and details with the advertiser." data-advertiser="R3 Homes (Sample)" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/property-rental.svg" alt="Sample 2BHK Apartment for Rent" loading="lazy"><span class="ads-card-category">FOR RENT</span></div><div class="ads-card-body"><div class="ads-category-label">Property Sales &amp; Rentals</div><h3>Sample 2BHK Apartment for Rent</h3><p>Illustrative listing only. Sample 2-bedroom apartment in Life Republic; sample asking rent INR 28,000 per month. Verify availability, terms, and details with the advertiser.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">RH</span>R3 Homes (Sample)</span></div></div></article><article class="ads-card ads-art-yellow" data-name="Everyday Essentials" data-category="Fashion &amp; Clothing" data-details="Thoughtful everyday accessories that bring a little extra style." data-advertiser="Everyday Edit" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/everyday-essentials.svg" alt="Everyday Essentials" loading="lazy"><span class="ads-card-category">TRENDING</span></div><div class="ads-card-body"><div class="ads-category-label">Fashion &amp; Clothing</div><h3>Everyday Essentials</h3><p>Thoughtful everyday accessories that bring a little extra style.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">EE</span>Everyday Edit</span></div></div></article><article class="ads-card ads-art-green" data-name="Work Smarter" data-category="Computer &amp; IT" data-details="Tools and accessories to help make your workday smoother." data-advertiser="WorkSpace" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/work-smarter.svg" alt="Work Smarter" loading="lazy"><span class="ads-card-category">SMART PICKS</span></div><div class="ads-card-body"><div class="ads-category-label">Computer &amp; IT</div><h3>Work Smarter</h3><p>Tools and accessories to help make your workday smoother.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">W</span>WorkSpace</span></div></div></article><article class="ads-card ads-art-purple" data-name="Weekend Getaways" data-category="Events, Travel &amp; Lifestyle" data-details="Get inspired for a short break, a new destination, or a local escape." data-advertiser="Wander Guide" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/weekend-getaways.svg" alt="Weekend Getaways" loading="lazy"><span class="ads-card-category">GET INSPIRED</span></div><div class="ads-card-body"><div class="ads-category-label">Events, Travel &amp; Lifestyle</div><h3>Weekend Getaways</h3><p>Get inspired for a short break, a new destination, or a local escape.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">WG</span>Wander Guide</span></div></div></article><article class="ads-card ads-art-orange" data-name="Home Refresh" data-category="Home &amp; Garden" data-details="Simple ideas and finds to make your space feel more like home." data-advertiser="Home &amp; Co." data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/home-refresh.svg" alt="Home Refresh" loading="lazy"><span class="ads-card-category">EDITOR&#x27;S PICK</span></div><div class="ads-card-body"><div class="ads-category-label">Home &amp; Garden</div><h3>Home Refresh</h3><p>Simple ideas and finds to make your space feel more like home.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">HC</span>Home &amp; Co.</span></div></div></article><article class="ads-card ads-art-blue" data-name="Professional Services" data-category="Professional Services" data-details="Connect with professionals for the projects that matter to you." data-advertiser="Pro Services" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/professional-services.svg" alt="Professional Services" loading="lazy"><span class="ads-card-category">POPULAR</span></div><div class="ads-card-body"><div class="ads-category-label">Professional Services</div><h3>Professional Services</h3><p>Connect with professionals for the projects that matter to you.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">PS</span>Pro Services</span></div></div></article><article class="ads-card ads-art-pink" data-name="Local Food Offers" data-category="Food &amp; Catering" data-details="Find a new favourite with local food offers and dining experiences." data-advertiser="Local Flavours" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/local-food-offers.svg" alt="Local Food Offers" loading="lazy"><span class="ads-card-category">SPECIAL</span></div><div class="ads-card-body"><div class="ads-category-label">Food &amp; Catering</div><h3>Local Food Offers</h3><p>Find a new favourite with local food offers and dining experiences.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">LF</span>Local Flavours</span></div></div></article><article class="ads-card ads-art-yellow" data-name="Style Collection" data-category="Fashion &amp; Clothing" data-details="Discover fresh looks and wardrobe essentials for every day." data-advertiser="Style Collective" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/style-collection.svg" alt="Style Collection" loading="lazy"><span class="ads-card-category">NEW</span></div><div class="ads-card-body"><div class="ads-category-label">Fashion &amp; Clothing</div><h3>Style Collection</h3><p>Discover fresh looks and wardrobe essentials for every day.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">SC</span>Style Collective</span></div></div></article><article class="ads-card ads-art-green" data-name="Smart Tech Deals" data-category="Computer &amp; IT" data-details="Upgrade your everyday setup with useful smart devices and accessories." data-advertiser="SmartTech Store" data-date="0" data-start="" data-end="" data-override="false"><div class="ads-card-art"><img class="ads-card-image" src="assets/images/ads/smart-tech-deals.svg" alt="Smart Tech Deals" loading="lazy"><span class="ads-card-category">FEATURED</span></div><div class="ads-card-body"><div class="ads-category-label">Computer &amp; IT</div><h3>Smart Tech Deals</h3><p>Upgrade your everyday setup with useful smart devices and accessories.</p><div class="ads-card-footer"><span class="ads-advertiser"><span class="ads-advertiser-avatar">SS</span>SmartTech Store</span></div></div></article>
+    </div>
+    <div class="ads-empty" id="ads-empty">
+      <strong>No advertisements found</strong>
+      <span>Try another keyword or select a different category.</span>
+    </div>
   </section>
 </main>
+<script>
+(() => {
+  const tabs = [...document.querySelectorAll(".ads-tab")];
+  const cards = [...document.querySelectorAll(".ads-card")];
+  const input = document.getElementById("ads-search-input");
+  const form = document.getElementById("ads-search-form");
+  const sort = document.getElementById("ads-sort");
+  const count = document.getElementById("ads-result-count");
+  const empty = document.getElementById("ads-empty");
+  const grid = document.getElementById("ads-grid");
+  const title = document.getElementById("ads-title");
+  let selectedCategory = "All";
+
+  function render() {
+    const query = input.value.trim().toLocaleLowerCase();
+    const currentDate = new Date();
+    const today = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
+    const visibleCards = cards.filter((card) => {
+      const isLive = card.dataset.override === "true"
+        || ((!card.dataset.start || today >= card.dataset.start)
+          && (!card.dataset.end || today <= card.dataset.end));
+      const matchesCategory = selectedCategory === "All"
+        || card.dataset.category.toLocaleLowerCase() === selectedCategory.toLocaleLowerCase();
+      const searchable = `${card.dataset.name} ${card.dataset.details} ${card.dataset.category} ${card.dataset.advertiser}`
+        .toLocaleLowerCase();
+      const matchesSearch = !query || searchable.includes(query);
+      card.hidden = !(isLive && matchesCategory && matchesSearch);
+      return !card.hidden;
+    });
+    visibleCards.sort((first, second) => {
+      if (sort.value === "az") return first.dataset.name.localeCompare(second.dataset.name);
+      if (sort.value === "za") return second.dataset.name.localeCompare(first.dataset.name);
+      const dateOrder = Number(first.dataset.date) - Number(second.dataset.date);
+      if (sort.value === "new-old") return -dateOrder || first.dataset.name.localeCompare(second.dataset.name);
+      return dateOrder || first.dataset.name.localeCompare(second.dataset.name);
+    });
+    visibleCards.forEach((card) => grid.appendChild(card));
+    count.textContent = `Showing ${visibleCards.length} advertisement${visibleCards.length === 1 ? "" : "s"}`;
+    title.textContent = selectedCategory === "All"
+      ? "Popular advertisements" : `${selectedCategory} advertisements`;
+    empty.style.display = visibleCards.length ? "none" : "block";
+    grid.style.display = visibleCards.length ? "grid" : "none";
+  }
+
+  tabs.forEach((tab) => tab.addEventListener("click", () => {
+    selectedCategory = tab.dataset.category;
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+    });
+    render();
+  }));
+  input.addEventListener("input", render);
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    render();
+    document.getElementById("advertisements").scrollIntoView({behavior: "smooth"});
+  });
+  sort.addEventListener("change", render);
+  document.getElementById("ads-view-all").addEventListener("click", () => {
+    selectedCategory = "All";
+    input.value = "";
+    tabs.forEach((tab) => {
+      const active = tab.dataset.category === "All";
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+    });
+    render();
+  });
+  render();
+})();
+</script>
+<div class="gtranslate_wrapper"></div>
+<script>window.gtranslateSettings = {"default_language": "en", "languages": ["en", "hi", "mr"], "wrapper_selector": ".gtranslate_wrapper"};</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
 <footer>Green Community &nbsp; | &nbsp; Stronger Neighbours &nbsp; | &nbsp; A Brighter Future &nbsp; • &nbsp; Life Republic R3 News</footer>
 </body>
 </html>
