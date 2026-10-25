@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discover — Ads & Offers</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #e6eaf0;
+      --surface: #ffffff;
+      --soft: #f5f7fb;
+      --radius: 18px;
+      --shadow: 0 8px 24px rgba(20, 35, 70, .07);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f8faff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 28px 24px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      border-radius: 24px;
+      background: linear-gradient(120deg, #eff6ff, #f5f3ff 65%, #fff);
+      border: 1px solid #e5eaff;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      right: -70px; top: -120px;
+      background: rgba(37, 99, 235, .08);
+      pointer-events: none;
+    }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; }
+    .brand-mark {
+      width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center;
+      color: #fff; background: var(--blue); box-shadow: 0 6px 15px #2563eb40;
+    }
+    .brand-mark svg { width: 22px; height: 22px; }
+    .top-link { color: #344054; text-decoration: none; font-size: .92rem; font-weight: 650; }
+    .hero-content { max-width: 680px; padding: 35px 0 6px; position: relative; z-index: 1; }
+    .eyebrow { color: var(--blue); font-weight: 750; font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; }
+    h1 { font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -.055em; margin: 10px 0 12px; }
+    .hero p { color: #596579; margin: 0; max-width: 550px; }
+    .search-wrap {
+      display: flex; gap: 10px; align-items: center; max-width: 650px; margin-top: 24px;
+      padding: 7px; background: #fff; border: 1px solid #e4e8f0; border-radius: 14px;
+      box-shadow: 0 8px 24px #1d2d5010;
+    }
+    .search-icon { color: #7b8496; margin-left: 9px; display: grid; place-items: center; }
+    .search-icon svg { width: 20px; height: 20px; }
+    .search-wrap input { border: 0; outline: 0; min-width: 0; flex: 1; padding: 10px 2px; color: var(--ink); background: transparent; }
+    .primary-btn { border: 0; border-radius: 10px; padding: 11px 18px; background: var(--blue); color: #fff; font-weight: 700; transition: background .2s, transform .2s; }
+    .primary-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    .section { margin-top: 34px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .section-heading h2 { margin: 0; font-size: 1.25rem; letter-spacing: -.025em; }
+    .section-heading p { color: var(--muted); margin: 4px 0 0; font-size: .9rem; }
+    .text-link { border: 0; padding: 0; color: var(--blue); background: transparent; font-weight: 700; white-space: nowrap; }
+
+    .tabs { display: flex; gap: 9px; overflow-x: auto; padding: 2px 1px 8px; scrollbar-width: thin; }
+    .tab { flex: 0 0 auto; padding: 9px 16px; border: 1px solid var(--line); background: #fff; color: #596579; border-radius: 999px; font-weight: 650; font-size: .9rem; transition: all .18s; }
+    .tab:hover { border-color: #b9ccff; color: var(--blue); }
+    .tab.active { color: #fff; background: var(--blue); border-color: var(--blue); box-shadow: 0 4px 12px #2563eb30; }
+
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 12px 0 16px; }
+    .toolbar h2 { margin: 0; font-size: 1.25rem; letter-spacing: -.025em; }
+    .result-count { color: var(--muted); font-size: .88rem; margin-top: 3px; }
+    .sort-select { border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: #fff; color: #475467; outline-color: #b9ccff; }
+
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .ad-card { min-width: 0; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 3px 12px rgba(20,35,70,.025); transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .ad-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: #d4def4; }
+    .card-art { position: relative; height: 172px; display: grid; place-items: center; overflow: hidden; }
+    .card-art::before, .card-art::after { content: ""; position: absolute; border-radius: 50%; opacity: .55; }
+    .card-art::before { width: 170px; height: 170px; right: -35px; top: -65px; background: rgba(255,255,255,.5); }
+    .card-art::after { width: 100px; height: 100px; left: -30px; bottom: -50px; background: rgba(255,255,255,.55); }
+    .art-blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+    .art-pink { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+    .art-yellow { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+    .art-green { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+    .art-purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+    .art-orange { background: linear-gradient(135deg, #ffedd5, #fed7aa); }
+    .art-icon { position: relative; z-index: 1; width: 78px; height: 78px; display: grid; place-items: center; border-radius: 24px; color: #243b66; background: rgba(255,255,255,.62); box-shadow: 0 10px 25px rgba(39,55,95,.09); transform: rotate(-5deg); }
+    .art-icon svg { width: 39px; height: 39px; }
+    .tag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 5px 8px; border-radius: 7px; background: rgba(255,255,255,.88); color: #344054; font-size: .66rem; font-weight: 800; letter-spacing: .05em; }
+    .card-body { padding: 16px; }
+    .category-label { color: var(--blue); text-transform: uppercase; letter-spacing: .07em; font-size: .68rem; font-weight: 800; }
+    .card-body h3 { margin: 6px 0 6px; font-size: 1.02rem; letter-spacing: -.02em; }
+    .card-body p { min-height: 42px; margin: 0; color: var(--muted); font-size: .86rem; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 17px; padding-top: 13px; border-top: 1px solid #f0f2f6; }
+    .advertiser { display: flex; align-items: center; gap: 7px; min-width: 0; color: #667085; font-size: .75rem; }
+    .avatar { flex: 0 0 25px; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: #f0f3f9; color: #475467; font-size: .67rem; font-weight: 800; }
+    .card-link { display: inline-flex; align-items: center; gap: 5px; color: var(--blue); text-decoration: none; font-weight: 750; font-size: .82rem; white-space: nowrap; }
+    .card-link svg { width: 15px; height: 15px; }
+    .empty { display: none; text-align: center; padding: 48px 16px; color: var(--muted); background: #fff; border: 1px dashed #d7deea; border-radius: var(--radius); }
+    .empty strong { display: block; color: var(--ink); font-size: 1.05rem; margin-bottom: 5px; }
+    .footer-note { display: flex; justify-content: center; align-items: center; gap: 8px; color: #7a8496; font-size: .82rem; margin-top: 28px; text-align: center; }
+    .footer-note svg { width: 17px; height: 17px; }
+
+    @media (max-width: 1000px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 720px) {
+      .page { padding: 16px 14px 36px; }
+      .hero { padding: 22px 18px; border-radius: 19px; }
+      .hero-content { padding-top: 29px; }
+      .search-wrap { gap: 5px; }
+      .search-wrap .primary-btn { padding: 10px 13px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .card-art { height: 135px; }
+      .card-body { padding: 12px; }
+      .card-body p { min-height: 62px; }
+      .card-footer { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: 1fr; }
+      .card-art { height: 180px; }
+      .card-body p { min-height: 0; }
+      .card-footer { flex-direction: row; align-items: center; }
+      .top-link { font-size: .82rem; }
+      .section-heading h2, .toolbar h2 { font-size: 1.12rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Discover home" style="text-decoration:none;color:inherit">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-8-8 18-2-8-8-2Z"/><path d="m11 13 4-4"/></svg>
+          </span>
+          Discover
+        </a>
+        <a class="top-link" href="#advertisements">Explore advertisements&nbsp; ↗</a>
+      </nav>
+      <div class="hero-content">
+        <div class="eyebrow">Find your next great thing</div>
+        <h1>Discover something great.</h1>
+        <p>Explore promotions, products, and services picked to help you find just what you need.</p>
+        <form class="search-wrap" id="searchForm" role="search">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          </span>
+          <input id="searchInput" type="search" placeholder="Search advertisements..." aria-label="Search advertisements" />
+          <button class="primary-btn" type="submit">Search</button>
+        </form>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="categoryTitle">
+      <div class="section-heading">
+        <div>
+          <h2 id="categoryTitle">Browse categories</h2>
+          <p>Choose a category to find relevant advertisements.</p>
+        </div>
+        <button class="text-link" id="showAll" type="button">View all</button>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Advertisement categories">
+        <button class="tab active" role="tab" aria-selected="true" data-category="All">All ads</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Technology">Technology</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Fashion">Fashion</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Food">Food & dining</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Services">Services</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Home">Home & living</button>
+        <button class="tab" role="tab" aria-selected="false" data-category="Travel">Travel</button>
+      </div>
+    </section>
+
+    <section class="section" id="advertisements" aria-labelledby="adsTitle">
+      <div class="toolbar">
+        <div>
+          <h2 id="adsTitle">Popular advertisements</h2>
+          <div class="result-count" id="resultCount" aria-live="polite">Showing 8 advertisements</div>
+        </div>
+        <label>
+          <span class="sr-only" style="position:absolute;left:-10000px">Sort advertisements</span>
+          <select class="sort-select" id="sortSelect" aria-label="Sort advertisements">
+            <option value="recommended">Recommended</option>
+            <option value="az">Name: A to Z</option>
+            <option value="category">Category</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="grid" id="adGrid">
+        <article class="ad-card" data-category="Technology" data-name="Smart Tech Deals" data-description="Upgrade your everyday setup with useful smart devices and accessories.">
+          <div class="card-art art-blue">
+            <span class="tag">FEATURED</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8h10"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Technology</div><h3>Smart Tech Deals</h3>
+            <p>Upgrade your everyday setup with useful smart devices and accessories.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">ST</span>SmartTech Store</span><a class="card-link" href="#" data-message="Smart Tech Deals">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Fashion" data-name="Style Collection" data-description="Discover fresh looks and wardrobe essentials for every day.">
+          <div class="card-art art-pink">
+            <span class="tag">NEW</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 12 6l4-2 4 4-3 3v9H7v-9L4 8l4-4Z"/><path d="M9 5c0 2 1 3 3 3s3-1 3-3"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Fashion</div><h3>Style Collection</h3>
+            <p>Discover fresh looks and wardrobe essentials for every day.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">SC</span>Style Collective</span><a class="card-link" href="#" data-message="Style Collection">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Food" data-name="Local Food Offers" data-description="Find a new favourite with local food offers and dining experiences.">
+          <div class="card-art art-yellow">
+            <span class="tag">SPECIAL</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v8a3 3 0 0 0 6 0V2M6 2v20M16 2v20M16 2c4 2 5 5 5 9h-5"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Food & dining</div><h3>Local Food Offers</h3>
+            <p>Find a new favourite with local food offers and dining experiences.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">LF</span>Local Flavours</span><a class="card-link" href="#" data-message="Local Food Offers">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Services" data-name="Professional Services" data-description="Connect with professionals for the projects that matter to you.">
+          <div class="card-art art-green">
+            <span class="tag">POPULAR</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Services</div><h3>Professional Services</h3>
+            <p>Connect with professionals for the projects that matter to you.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">PS</span>Pro Services</span><a class="card-link" href="#" data-message="Professional Services">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Home" data-name="Home Refresh" data-description="Simple ideas and finds to make your space feel more like home.">
+          <div class="card-art art-purple">
+            <span class="tag">EDITOR'S PICK</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1V10Z"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Home & living</div><h3>Home Refresh</h3>
+            <p>Simple ideas and finds to make your space feel more like home.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">HR</span>Home & Co.</span><a class="card-link" href="#" data-message="Home Refresh">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Travel" data-name="Weekend Getaways" data-description="Get inspired for a short break, a new destination, or a local escape.">
+          <div class="card-art art-orange">
+            <span class="tag">GET INSPIRED</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 9 9l-7 3 7 2 3 8 3-8 7-2-7-3-3-7Z"/><path d="m5 4 1 2M19 17l1 2"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Travel</div><h3>Weekend Getaways</h3>
+            <p>Get inspired for a short break, a new destination, or a local escape.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">WG</span>Wander Guide</span><a class="card-link" href="#" data-message="Weekend Getaways">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Technology" data-name="Work Smarter" data-description="Tools and accessories to help make your workday smoother.">
+          <div class="card-art art-green">
+            <span class="tag">SMART PICKS</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Technology</div><h3>Work Smarter</h3>
+            <p>Tools and accessories to help make your workday smoother.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">WS</span>WorkSpace</span><a class="card-link" href="#" data-message="Work Smarter">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+
+        <article class="ad-card" data-category="Fashion" data-name="Everyday Essentials" data-description="Thoughtful everyday accessories that bring a little extra style.">
+          <div class="card-art art-blue">
+            <span class="tag">TRENDING</span>
+            <span class="art-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 13H5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span>
+          </div>
+          <div class="card-body">
+            <div class="category-label">Fashion</div><h3>Everyday Essentials</h3>
+            <p>Thoughtful everyday accessories that bring a little extra style.</p>
+            <div class="card-footer"><span class="advertiser"><span class="avatar">EE</span>Everyday Edit</span><a class="card-link" href="#" data-message="Everyday Essentials">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="empty" id="emptyState">
+        <strong>No advertisements found</strong>
+        Try another keyword or select a different category.
+      </div>
+      <div class="footer-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        Advertisements are examples for this demo. Replace them with your real campaigns and destination links.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const tabs = [...document.querySelectorAll('.tab')];
+      const cards = [...document.querySelectorAll('.ad-card')];
+      const searchInput = document.getElementById('searchInput');
+      const searchForm = document.getElementById('searchForm');
+      const sortSelect = document.getElementById('sortSelect');
+      const resultCount = document.getElementById('resultCount');
+      const emptyState = document.getElementById('emptyState');
+      const grid = document.getElementById('adGrid');
+      const adsTitle = document.getElementById('adsTitle');
+      let selectedCategory = 'All';
+
+      function render() {
+        const query = searchInput.value.trim().toLowerCase();
+        const visibleCards = [];
+
+        cards.forEach(card => {
+          const matchesCategory = selectedCategory === 'All' || card.dataset.category === selectedCategory;
+          const searchable = `${card.dataset.name} ${card.dataset.description} ${card.dataset.category}`.toLowerCase();
+          const matchesSearch = !query || searchable.includes(query);
+          const visible = matchesCategory && matchesSearch;
+          card.hidden = !visible;
+          if (visible) visibleCards.push(card);
+        });
+
+        const sort = sortSelect.value;
+        visibleCards.sort((a, b) => {
+          if (sort === 'az') return a.dataset.name.localeCompare(b.dataset.name);
+          if (sort === 'category') return a.dataset.category.localeCompare(b.dataset.category) || a.dataset.name.localeCompare(b.dataset.name);
+          return cards.indexOf(a) - cards.indexOf(b);
+        });
+        visibleCards.forEach(card => grid.appendChild(card));
+
+        resultCount.textContent = `Showing ${visibleCards.length} advertisement${visibleCards.length === 1 ? '' : 's'}`;
+        adsTitle.textContent = selectedCategory === 'All' ? 'Popular advertisements' : `${selectedCategory === 'Food' ? 'Food & dining' : selectedCategory} advertisements`;
+        emptyState.style.display = visibleCards.length ? 'none' : 'block';
+        grid.style.display = visibleCards.length ? 'grid' : 'none';
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          selectedCategory = tab.dataset.category;
+          tabs.forEach(item => {
+            const active = item === tab;
+            item.classList.toggle('active', active);
+            item.setAttribute('aria-selected', String(active));
+          });
+          render();
+        });
+      });
+
+      searchInput.addEventListener('input', render);
+      searchForm.addEventListener('submit', event => {
+        event.preventDefault();
+        render();
+        document.getElementById('advertisements').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      sortSelect.addEventListener('change', render);
+      document.getElementById('showAll').addEventListener('click', () => {
+        selectedCategory = 'All';
+        searchInput.value = '';
+        tabs.forEach(tab => {
+          const active = tab.dataset.category === 'All';
+          tab.classList.toggle('active', active);
+          tab.setAttribute('aria-selected', String(active));
+        });
+        render();
+      });
+
+      document.querySelectorAll('.card-link').forEach(link => {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          alert(`Demo card: ${link.dataset.message}\n\nReplace this link with the real advertisement destination.`);
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
