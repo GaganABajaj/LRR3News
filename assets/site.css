@@ -193,12 +193,13 @@ footer { background: #eaf5ef; border-top: 1px solid #d5e8dc; color: #315d4b; tex
 .ads-sort-label { display: flex; align-items: center; gap: 8px; color: #667085; font-size: .82rem; }
 .ads-sort { padding: 9px 12px; border: 1px solid #e6eaf0; border-radius: 10px; outline-color: #b9ccff; color: #475467; background: white; font: inherit; }
 .ads-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.ads-card { display: block; min-width: 0; overflow: hidden; border: 1px solid #e6eaf0; border-radius: 18px; color: inherit; background: white; box-shadow: 0 3px 12px rgba(20,35,70,.025); text-decoration: none; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.ads-card { position: relative; display: block; min-width: 0; overflow: hidden; border: 1px solid #e6eaf0; border-radius: 18px; color: inherit; background: white; box-shadow: 0 3px 12px rgba(20,35,70,.025); text-decoration: none; transition: transform .2s, box-shadow .2s, border-color .2s; }
 .ads-card[href] { cursor: pointer; }
 .ads-card[href]:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
-.ads-card:hover { transform: translateY(-4px); border-color: #d4def4; box-shadow: 0 8px 24px rgba(20,35,70,.07); }
+.ads-card:hover { z-index: 5; overflow: visible; transform: translateY(-4px); border-color: #d4def4; box-shadow: 0 8px 24px rgba(20,35,70,.07); }
 .ads-card[hidden] { display: none; }
 .ads-card-art { position: relative; display: grid; height: 172px; place-items: center; overflow: hidden; }
+.ads-card:hover .ads-card-art { overflow: visible; z-index: 5; }
 .ads-card-art:before, .ads-card-art:after { position: absolute; border-radius: 50%; background: rgba(255,255,255,.5); content: ""; }
 .ads-card-art:before { top: -65px; right: -35px; width: 170px; height: 170px; }
 .ads-card-art:after { bottom: -50px; left: -30px; width: 100px; height: 100px; }
@@ -208,7 +209,8 @@ footer { background: #eaf5ef; border-top: 1px solid #d5e8dc; color: #315d4b; tex
 .ads-art-green .ads-card-art { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
 .ads-art-purple .ads-card-art { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
 .ads-art-orange .ads-card-art { background: linear-gradient(135deg, #ffedd5, #fed7aa); }
-.ads-card-image { position: absolute; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+.ads-card-image { position: absolute; z-index: 1; width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+.ads-card-image:hover { z-index: 5; transform: scale(2.5); object-fit: contain; background: white; box-shadow: 0 10px 32px rgba(20,35,70,.24); }
 .ads-art-initials { position: relative; z-index: 1; display: grid; width: 78px; height: 78px; place-items: center; transform: rotate(-5deg); border-radius: 24px; color: #243b66; background: rgba(255,255,255,.72); box-shadow: 0 10px 25px rgba(39,55,95,.09); font-size: 1.4rem; font-weight: 800; }
 .ads-card-category { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 5px 8px; border-radius: 7px; color: #344054; background: rgba(255,255,255,.9); font-size: .66rem; font-weight: 800; letter-spacing: .05em; }
 .ads-card-body { padding: 16px; }
