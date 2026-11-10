@@ -4,10 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Accountability Map</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -27,53 +30,76 @@ header p { margin: 0; color: #b8cbd7; }
 
 main { padding: 24px; }
 
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
-button, input { cursor: pointer; }
 
 #map {
-  height: 680px;
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 0;
   overflow: hidden;
+
   border-radius: 14px;
-  background-color: #e5e9e6;
-  background-image:
-    linear-gradient(25deg, transparent 47%,
-      #fff 48%, #fff 51%, transparent 52%),
-    linear-gradient(115deg, transparent 47%,
-      #fff 48%, #fff 51%, transparent 52%);
-  background-size: 160px 130px;
   border: 1px solid #ccd5d9;
+
+  background-image: url("../assets/images/Lr-map.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #e5e9e6;
 }
 
-/* Replace this map background with your screenshot:
-   background-image: url('your-map-screenshot.jpg');
-   background-size: cover;
-   background-position: center;
-*/
-
-.map-label {
-  position: absolute;
-  color: #718079;
-  font-size: 13px;
-  font-weight: bold;
-  pointer-events: none;
-}
+/* Markers */
 
 .marker {
   position: absolute;
-  width: 25px;
-  height: 25px;
+
+  /* Coordinates remain relative to the map */
+  left: var(--x);
+  top: var(--y);
+
+  width: 23px;
+  height: 23px;
+
+  padding: 0;
   border-radius: 50%;
   border: 3px solid white;
-  box-shadow: 0 2px 8px #0005;
+
+  box-shadow: 0 2px 8px #0006;
+  cursor: pointer;
+
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.marker:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+  z-index: 5;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  #map {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+  }
+
+  .marker {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+/* MAP MARKERS */
+
+.marker {
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px #0006;
   cursor: pointer;
   transform: translate(-50%, -50%);
   transition: transform .2s;
@@ -85,120 +111,127 @@ button, input { cursor: pointer; }
   z-index: 5;
 }
 
-.marker.active {
-  outline: 3px solid #243342;
-  outline-offset: 3px;
-}
-
-.legend {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  font-size: 13px;
-  margin-top: 15px;
-}
-
-.legend span {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.legend i {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-/* Modal */
+/* MODAL BACKGROUND */
 
 .modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: #101c27a8;
+  background: #101c27bb;
   z-index: 20;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 20px;
 }
 
-.modal-overlay.show { display: flex; }
+.modal-overlay.show {
+  display: flex;
+}
+
+/* LARGER, SCROLLABLE MODAL */
 
 .modal {
   background: white;
-  width: min(1050px, 100%);
-  max-height: 92vh;
+  width: min(1400px, 96vw);
+  height: 90vh;
+  max-height: 950px;
   overflow-y: auto;
-  border-radius: 16px;
+  border-radius: 18px;
   position: relative;
-  padding: 25px;
-  box-shadow: 0 15px 50px #0003;
+  padding: 30px;
+  box-shadow: 0 15px 50px #0004;
 }
 
 .close {
-  position: absolute;
-  right: 18px;
-  top: 15px;
+  position: sticky;
+  float: right;
+  top: 0;
+  z-index: 10;
   border: none;
   background: #edf1f4;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 20px;
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 .modal-heading {
+  margin-bottom: 25px;
   padding-right: 45px;
-  margin-bottom: 22px;
 }
 
-.modal-heading h2 { margin: 0 0 7px; }
-.modal-heading p { color: #71808c; margin: 0; }
+.modal-heading h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.modal-heading p {
+  color: #71808c;
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: #dceee6;
+  color: #16845a;
+  margin-bottom: 10px;
+}
+
+/* THREE SECTIONS */
 
 .partitions {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
 }
 
 .panel {
   background: #f5f7f8;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
-  padding-bottom: 18px;
+  padding-bottom: 20px;
+  border: 1px solid #e4e9ed;
 }
 
 .panel img {
   width: 100%;
-  height: 180px;
+  height: 250px;
   object-fit: cover;
   background: #dce3e7;
 }
 
-.panel-content { padding: 15px; }
+.panel-content {
+  padding: 20px;
+}
 
-.panel h3 { margin: 0 0 12px; font-size: 18px; }
+.panel h3 {
+  margin: 0 0 15px;
+  font-size: 21px;
+}
 
 .panel p {
   color: #63717d;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .score {
-  font-size: 28px;
+  font-size: 34px;
   font-weight: bold;
   color: #d17b26;
 }
 
 .score-bar {
-  height: 8px;
+  height: 9px;
   background: #dce3e7;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .score-fill {
@@ -211,20 +244,28 @@ button, input { cursor: pointer; }
   font-weight: bold;
 }
 
-.tag {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  background: #dceee6;
-  color: #16845a;
-}
+/* MOBILE */
 
-@media(max-width: 750px) {
+@media(max-width: 800px) {
   main { padding: 12px; }
-  #map { height: 500px; }
-  .partitions { grid-template-columns: 1fr; }
-  .panel img { height: 200px; }
+
+  #map { height: 550px; }
+
+  .modal-overlay { padding: 8px; }
+
+  .modal {
+    width: 100%;
+    height: 95vh;
+    padding: 18px;
+  }
+
+  .partitions {
+    grid-template-columns: 1fr;
+  }
+
+  .panel img {
+    height: 220px;
+  }
 }
 </style>
 </head>
@@ -237,49 +278,22 @@ button, input { cursor: pointer; }
 </header>
 
 <main>
+  <h2>Location Map</h2>
+  <p>Click or hover over a marker to explore.</p>
+  <div id="map"></div>
 
-  <div class="toolbar">
-    <div>
-      <h2>Location Map</h2>
-      <p>Click or hover over a marker to explore.</p>
-    </div>
-
-    <label>
-      Marker colour:
-      <input type="color" id="markerColor" value="#e34b4b">
-    </label>
-  </div>
-
-  <div id="map">
-    <span class="map-label" style="top:15%;left:18%">
-      NORTH AREA
-    </span>
-    <span class="map-label" style="top:48%;left:62%">
-      CENTRAL AREA
-    </span>
-    <span class="map-label" style="top:80%;left:25%">
-      SOUTH AREA
-    </span>
-  </div>
-
-  <div class="legend">
-    <span><i style="background:#e34b4b"></i> Unresolved</span>
-    <span><i style="background:#e5a333"></i> In progress</span>
-    <span><i style="background:#249b6b"></i> Resolved</span>
-  </div>
-
+<p>  lorem: ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
 </main>
 
-<!-- INFORMATION MODAL -->
+<!-- MODAL -->
 
 <div class="modal-overlay" id="modal"
      onclick="closeOutside(event)">
 
-  <div class="modal" role="dialog"
-       aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" role="dialog" aria-modal="true">
 
-    <button class="close" onclick="closeModal()"
-            aria-label="Close">&times;</button>
+    <button class="close" onclick="closeModal()">×</button>
 
     <div class="modal-heading">
       <span class="tag" id="status"></span>
@@ -288,8 +302,6 @@ button, input { cursor: pointer; }
     </div>
 
     <div class="partitions">
-
-      <!-- PART 1: ISSUE -->
 
       <section class="panel">
         <img id="issueImage" alt="Original issue">
@@ -300,10 +312,8 @@ button, input { cursor: pointer; }
         </div>
       </section>
 
-      <!-- PART 2: RESPONSIBILITY -->
-
       <section class="panel">
-        <img id="responsibilityImage" alt="Responsible authority">
+        <img id="responsibilityImage" alt="Responsibility">
         <div class="panel-content">
           <h3>02. Responsibility</h3>
           <p><b>Responsible:</b> <span id="authority"></span></p>
@@ -320,10 +330,8 @@ button, input { cursor: pointer; }
         </div>
       </section>
 
-      <!-- PART 3: RESOLUTION -->
-
       <section class="panel">
-        <img id="resolutionImage" alt="Completed resolution">
+        <img id="resolutionImage" alt="Resolution">
         <div class="panel-content">
           <h3>03. The Resolution</h3>
           <p id="resolutionDescription"></p>
@@ -338,150 +346,262 @@ button, input { cursor: pointer; }
 
 <script>
 
-// EDIT YOUR LOCATIONS HERE
+/* =====================================================
+   LOCATION DATA
+
+   ADD A NEW LOCATION BY COPYING ONE COMPLETE BLOCK.
+
+   x = horizontal position (%)
+   y = vertical position (%)
+   color = individual marker colour
+
+   Each location contains all three sections.
+===================================================== */
 
 const locations = [
-{
-  id: 1,
-  title: "Road Damage",
-  location: "Central Road, Example City",
-  x: 25, y: 30,
-  color: "#e34b4b",
-  status: "Unresolved",
 
-  issueImage: "https://placehold.co/600x350/e5c7c7/533333?text=Original+Issue",
-  issue: "A damaged road creating safety risks for commuters.",
-  reported: "10 October 2026",
+  // -------- LOCATION 1 --------
 
-  responsibilityImage: "https://placehold.co/600x350/d6e2e9/34495e?text=Authority",
-  authority: "Municipal Corporation",
-  responsibility: "The local authority is responsible for road maintenance and repairs.",
-  score: 9,
+  {
+    title: "Road Damage",
+    location: "Central Road, Example City",
 
-  resolutionImage: "https://placehold.co/600x350/cde8d9/23553d?text=Resolution",
-  resolution: "The damaged section was repaired and resurfaced.",
-  resolvedBy: "Municipal Road Department",
-  praise: "Thank you for taking action!"
-},
-{
-  id: 2,
-  title: "Garbage Accumulation",
-  location: "North Residential Area",
-  x: 65, y: 45,
-  color: "#e5a333",
-  status: "In progress",
+    x: 25,
+    y: 30,
+    color: "#e34b4b",
 
-  issueImage: "https://placehold.co/600x350/e5c7c7/533333?text=Garbage+Issue",
-  issue: "Uncollected waste accumulating near residential buildings.",
-  reported: "15 October 2026",
+    status: "Unresolved",
 
-  responsibilityImage: "https://placehold.co/600x350/d6e2e9/34495e?text=Authority",
-  authority: "Waste Management Department",
-  responsibility: "Responsible for scheduled waste collection.",
-  score: 7,
+    issue: {
+      image: "https://placehold.co/600x350?text=Original+Issue",
+      description: "A damaged road creating safety risks for commuters.",
+      reported: "10 October 2026"
+    },
 
-  resolutionImage: "https://placehold.co/600x350/cde8d9/23553d?text=Cleanup",
-  resolution: "A cleanup operation has been initiated.",
-  resolvedBy: "Local Sanitation Team",
-  praise: "Appreciation for the cleanup effort!"
-},
-{
-  id: 3,
-  title: "Streetlight Failure",
-  location: "South Main Street",
-  x: 43, y: 76,
-  color: "#249b6b",
-  status: "Resolved",
+    responsibility: {
+      image: "https://placehold.co/600x350?text=Responsible+Authority",
+      authority: "Municipal Corporation",
+      description: "Responsible for road maintenance and repairs.",
+      score: 9
+    },
 
-  issueImage: "https://placehold.co/600x350/e5c7c7/533333?text=Broken+Streetlight",
-  issue: "A non-functional streetlight causing poor visibility.",
-  reported: "18 October 2026",
+    resolution: {
+      image: "https://placehold.co/600x350?text=Final+Resolution",
+      description: "The damaged section was repaired and resurfaced.",
+      resolvedBy: "Municipal Road Department",
+      praise: "Thank you for taking action!"
+    }
+  },
 
-  responsibilityImage: "https://placehold.co/600x350/d6e2e9/34495e?text=Authority",
-  authority: "Electrical Maintenance Department",
-  responsibility: "Responsible for public lighting infrastructure.",
-  score: 10,
 
-  resolutionImage: "https://placehold.co/600x350/cde8d9/23553d?text=Working+Light",
-  resolution: "The streetlight was replaced and restored.",
-  resolvedBy: "Electrical Maintenance Team",
-  praise: "Excellent work! Thank you for resolving this."
-}
+  // -------- LOCATION 2 --------
+
+  {
+    title: "Garbage Accumulation",
+    location: "North Residential Area",
+
+    x: 65,
+    y: 45,
+    color: "#e5a333",
+
+    status: "In Progress",
+
+    issue: {
+      image: "https://placehold.co/600x350?text=Garbage+Issue",
+      description: "Uncollected waste accumulating near residential buildings.",
+      reported: "15 October 2026"
+    },
+
+    responsibility: {
+      image: "https://placehold.co/600x350?text=Waste+Department",
+      authority: "Waste Management Department",
+      description: "Responsible for scheduled waste collection.",
+      score: 7
+    },
+
+    resolution: {
+      image: "https://placehold.co/600x350?text=Cleanup",
+      description: "A cleanup operation has been initiated.",
+      resolvedBy: "Local Sanitation Team",
+      praise: "Appreciation for the cleanup effort!"
+    }
+  },
+
+
+  // -------- LOCATION 3 --------
+
+  {
+    title: "Streetlight Failure",
+    location: "South Main Street",
+
+    x: 43,
+    y: 76,
+    color: "#249b6b",
+
+    status: "Resolved",
+
+    issue: {
+      image: "https://placehold.co/600x350?text=Broken+Streetlight",
+      description: "A non-functional streetlight causing poor visibility.",
+      reported: "18 October 2026"
+    },
+
+    responsibility: {
+      image: "https://placehold.co/600x350?text=Electrical+Department",
+      authority: "Electrical Maintenance Department",
+      description: "Responsible for public lighting infrastructure.",
+      score: 10
+    },
+
+    resolution: {
+      image: "https://placehold.co/600x350?text=Working+Streetlight",
+      description: "The streetlight was replaced and restored.",
+      resolvedBy: "Electrical Maintenance Team",
+      praise: "Excellent work! Thank you for resolving this."
+    }
+  }
+,
+
+
+  // -------- LOCATION 4 --------
+
+  {
+    title: "Streetlight Failure",
+    location: "South Main Street",
+
+    x: 55,
+    y: 90,
+    color: "#249b6b",
+
+    status: "Resolved",
+
+    issue: {
+      image: "https://placehold.co/600x350?text=Broken+Streetlight",
+      description: `A non-functional streetlight 
+      ff
+      causing poor visibility.`,
+      reported: "18 October 2026"
+    },
+
+    responsibility: {
+      image: "https://placehold.co/600x350?text=Electrical+Department",
+      authority: "Electrical Maintenance Department",
+      description: "Responsible for public lighting infrastructure.",
+      score: 10
+    },
+
+    resolution: {
+      image: "https://placehold.co/600x350?text=Working+Streetlight",
+      description: "The streetlight was replaced and restored.",
+      resolvedBy: "Electrical Maintenance Team",
+      praise: "Excellent work! Thank you for resolving this."
+    }
+  }
+
 ];
+
+
+/* =====================================================
+   MARKER GENERATION
+===================================================== */
 
 const map = document.getElementById("map");
 const modal = document.getElementById("modal");
 
-function createMarkers() {
-  locations.forEach(item => {
-    const marker = document.createElement("button");
+locations.forEach(item => {
 
-    marker.className = "marker";
-    marker.style.left = item.x + "%";
-    marker.style.top = item.y + "%";
-    marker.style.background = item.color;
-    marker.title = item.title;
-    marker.setAttribute("aria-label", item.title);
+  const marker = document.createElement("button");
 
-    marker.addEventListener("click", () => openModal(item));
-    marker.addEventListener("mouseenter", () => openModal(item));
+  marker.className = "marker";
 
-    map.appendChild(marker);
-  });
-}
+  marker.style.setProperty("--x", item.x + "%");
+  marker.style.setProperty("--y", item.y + "%");
+
+  marker.style.backgroundColor = item.color;
+
+  marker.title = item.title;
+  marker.setAttribute("aria-label", item.title);
+
+  marker.addEventListener("click", () => openModal(item));
+//  marker.addEventListener("mouseenter", () => openModal(item));
+
+  map.appendChild(marker);
+
+});
+
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
 
 function openModal(item) {
+
   document.getElementById("modalTitle").textContent = item.title;
   document.getElementById("location").textContent = item.location;
   document.getElementById("status").textContent = item.status;
 
-  document.getElementById("issueImage").src = item.issueImage;
-  document.getElementById("issueDescription").textContent = item.issue;
-  document.getElementById("reported").textContent = item.reported;
+  // SECTION 1: ISSUE
+
+  document.getElementById("issueImage").src =
+    item.issue.image;
+
+  document.getElementById("issueDescription").textContent =
+    item.issue.description;
+
+  document.getElementById("reported").textContent =
+    item.issue.reported;
+
+
+  // SECTION 2: RESPONSIBILITY
 
   document.getElementById("responsibilityImage").src =
-    item.responsibilityImage;
-  document.getElementById("authority").textContent = item.authority;
-  document.getElementById("responsibilityDescription").textContent =
-    item.responsibility;
+    item.responsibility.image;
 
-  document.getElementById("score").textContent = item.score;
+  document.getElementById("authority").textContent =
+    item.responsibility.authority;
+
+  document.getElementById("responsibilityDescription").textContent =
+    item.responsibility.description;
+
+  document.getElementById("score").textContent =
+    item.responsibility.score;
+
   document.getElementById("scoreFill").style.width =
-    (item.score * 10) + "%";
+    (item.responsibility.score * 10) + "%";
+
+
+  // SECTION 3: RESOLUTION
 
   document.getElementById("resolutionImage").src =
-    item.resolutionImage;
+    item.resolution.image;
+
   document.getElementById("resolutionDescription").textContent =
-    item.resolution;
-  document.getElementById("resolvedBy").textContent = item.resolvedBy;
-  document.getElementById("praise").textContent = item.praise;
+    item.resolution.description;
+
+  document.getElementById("resolvedBy").textContent =
+    item.resolution.resolvedBy;
+
+  document.getElementById("praise").textContent =
+    item.resolution.praise;
 
   modal.classList.add("show");
+
 }
+
 
 function closeModal() {
   modal.classList.remove("show");
 }
 
 function closeOutside(event) {
-  if (event.target === modal) closeModal();
-}
-
-// Change all marker colours manually
-
-document.getElementById("markerColor").addEventListener(
-  "input", event => {
-    document.querySelectorAll(".marker").forEach(marker => {
-      marker.style.background = event.target.value;
-    });
+  if (event.target === modal) {
+    closeModal();
   }
-);
+}
 
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") closeModal();
 });
-
-createMarkers();
 
 </script>
 
